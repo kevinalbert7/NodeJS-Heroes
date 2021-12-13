@@ -9,6 +9,7 @@ const heroes = require("./routes/heroes")
 // app.use(morgan('tiny'))
 
 app.use("/heroes", heroes)
+// app.use("/heroes/:slug", powers)
 
 
 app.listen(port, () => {
