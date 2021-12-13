@@ -1,8 +1,8 @@
 const express = require("express")
 const app = express() 
 
+let heroes = require("../heroes")
 
-const heroes = require("../heroes")
 
 app.get("/", (req, res) => {
     res.json(heroes)
@@ -21,6 +21,27 @@ app.get("/:slug/powers", (req, res) => {
   // console.log(powers)
   res.json(heroe.power)
 })
+
+app.post("/:slug", (req, res) => {
+  
+    const existingHeroe = heroes.find(heroe => heroe.slug === req.body.slug)
+    console.log("existingHeroe :", existingHeroe)
+    
+    if (existingHeroe) {
+      res.status(409).send("Heroe already exists")
+    } else {
+      const heroe = {
+        id: heroes.length + 1,
+        ...req.body
+      }
+
+    heroes = [...heroes, heroe]
+
+    res.json(heroe)
+    
+  }
+})
+
 
   module.exports = app
   
