@@ -1,19 +1,30 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { ChakraProvider } from '@chakra-ui/react'
-import Heroes from './Routes/Heroes'
-import Hero from './Routes/Hero'
+import { ChakraProvider, Box } from '@chakra-ui/react'
+import Heroes from './Pages/Heroes'
+import Hero from './Pages/Hero'
 
 
 const App = () => {
   return (
     <ChakraProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/heroes" element={<Heroes />} />
-          <Route path="/hero" element={<Hero />} />
-        </Routes>
-      </BrowserRouter>
+      <Box
+        w='100%'
+        h='100vh'
+        paddingTop='40px'
+        bgGradient={[
+            'linear(to-tr, teal.300, yellow.400)',
+            'linear(to-t, blue.200, teal.500)',
+            'linear(to-b, orange.100, purple.300)',
+        ]}
+      >
+        <BrowserRouter>
+          <Routes>
+            <Route exact path="/" element={<Heroes />} />
+            <Route path="/heroes/:slug" element={<Hero />} />
+          </Routes>
+        </BrowserRouter>
+      </Box>
     </ChakraProvider>
   )
 }
