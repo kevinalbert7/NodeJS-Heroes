@@ -11,7 +11,7 @@ const App = () => {
       <Box
         w='100%'
         h='100vh'
-        paddingTop='40px'
+        style={{padding:"40px 100px 40px 100px"}}
         bgGradient={[
             'linear(to-tr, teal.300, yellow.400)',
             'linear(to-t, blue.200, teal.500)',

@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import Card from '../Components/Card'
-import Form from '../Components/Form'
+import FormNewHero from '../Components/FormNewHero'
 
 const Hero = props => {
 
@@ -19,12 +19,12 @@ const Hero = props => {
     console.log(hero)
 
     return (
-        <>
+        <div style={{display: "flex", justifyContent:"space-between"}}>
             <Card
                 hero={hero}
             />
-            <Form />
-        </>
+                <FormNewHero />
+        </div>
     )
 }
 
