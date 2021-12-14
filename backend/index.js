@@ -6,14 +6,15 @@ const port = 5000
 const heroes = require("./routes/heroes")
 
 
-//accès à req.body
-app.use(express.json())
-
 //utilisation de ma route
 app.use("/heroes", heroes)
 
+//accès à req.body
+app.use(express.json())
+
 //middleware me permettant d'afficher mes requètes
 app.use(morgan('tiny'))
+
 
 // middleware global
 const log = (req, res, next) => {
