@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 import { HeroContext } from '../contexts/Hero'
 import { Grid, GridItem } from '../components/Grid'
-import { Container } from '../components/Container'
-import HeroCard from '../components/HeroCard'
+import Container from '../components/Container'
+import HeroCard from '../components/Home/HeroCard'
 
 const Home = () => {
     const { getHeroes } = useContext(HeroContext)
@@ -20,7 +20,7 @@ const Home = () => {
             <h1>SuperHeroes</h1>
             <Grid>
                 {heroes.map(hero => (
-                    <GridItem>
+                    <GridItem key={hero.slug}>
                         <Link to={`/heroes/${hero.slug}`}>
                             <HeroCard hero={hero}/>
                         </Link>

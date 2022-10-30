@@ -1,15 +1,10 @@
 import styled from "styled-components"
 
+import Img from "../Img"
+
 const Container = styled.div`
     border: 1px solid #333;
     border-radius: 5px;
-`
-
-const Img = styled.div`
-    height: 300px;
-    background-image: url('${props => props.backgroundImage}');
-    background-position: center;
-    background-size: cover;
 `
 
 const Info = styled.div`
@@ -22,7 +17,7 @@ const HeroCard = ({ hero }) => {
 
   return (
     <Container>
-        <Img backgroundImage={hero.image}/>
+        <Img height="350px" backgroundImage={hero.image}/>
         <Info>
             <h2>{hero.name}</h2>    
         </Info>
