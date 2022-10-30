@@ -1,9 +1,13 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ChakraProvider, Box } from '@chakra-ui/react'
-import Heroes from './Pages/Heroes'
-import Hero from './Pages/Hero'
 
+import { HeroContextProvider } from './contexts/Hero'
+import Home from './pages/Home'
+import Hero from './pages/Hero'
+import CreateHero from './pages/CreateHero'
+import NotFound from './pages/NotFound'
+import GlobalStyle from './styles/global'
 
 const App = () => {
   return (
@@ -18,11 +22,17 @@ const App = () => {
             'linear(to-b, orange.100, purple.300)',
         ]}
       >
+        <GlobalStyle/>
         <BrowserRouter>
-          <Routes>
-            <Route exact path="/" element={<Heroes />} />
-            <Route path="/heroes/:slug" element={<Hero />} />
-          </Routes>
+          <HeroContextProvider>
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route exact path="/heroes" element={<Home />} />
+              <Route path="/heroes/:slug" element={<Hero />} />
+              <Route path="/heroes/create" element={<CreateHero />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </HeroContextProvider>
         </BrowserRouter>
       </Box>
     </ChakraProvider>

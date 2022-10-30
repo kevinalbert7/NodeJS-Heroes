@@ -1,30 +1,23 @@
-import React, { useEffect, useState} from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import Card from '../Components/Card'
-import FormNewHero from '../Components/FormNewHero'
 
-const Hero = props => {
+import { HeroContext } from '../contexts/Hero'
+import Container from '../components/Container'
 
+const Hero = () => {
     const { slug } = useParams()
+    const { getHero } = useContext(HeroContext)
+    const [hero, setHero] = useState(null)
 
-    const [ hero, setHero ] = useState([])
-
-    useEffect (() => {
-        fetch(`http://localhost:5000/heroes/${slug}`)
-            .then(response => response.json())
-            .then(data => setHero(data))
-            console.log(setHero)
-    }, [slug])
-
-    console.log(hero)
+    useEffect(() => {
+        getHero(slug)
+            .then(response => console.log(response))
+    }, [])
 
     return (
-        <div style={{display: "flex", justifyContent:"space-between"}}>
-            <Card
-                hero={hero}
-            />
-                <FormNewHero />
-        </div>
+        <Container>
+            <h1>{hero.name}</h1>
+        </Container>
     )
 }
 
