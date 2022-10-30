@@ -25,6 +25,19 @@ const successIfExists = (req, res, next) => {
   }
 }
 
+const validateHero = (req, res, next) => {
+  //Obect.keys permet de récupérer dans un tableau de string
+  //toutes les clé de mon objet en paramètre
+  const allowedKeys = Object.keys(heroes[0])
+  const bodyKeys = Object.keys(req.body)
+  const invalidKey = bodyKeys.find(key => !allowedKeys.includes(key))
+  
+  if (invalidKey) {
+    res.status(400).send("Request invalid")
+  } else {
+    next()
+  }
+}
 
 app.get('/', (req, res) => {
   res.json(heroes)
@@ -44,7 +57,7 @@ app.get('/:slug/powers', successIfExists, (req, res) => {
   res.json(hero.power)
 })
 
-app.post('/', failIfExists, (req, res) => {
+app.post('/', failIfExists, validateHero, (req, res) => {
   const hero = { 
     slug: req.body.name.toLowerCase().replace(/[^\w\s]/gi, '-'),
     ...req.body
@@ -81,6 +94,21 @@ app.delete('/:slug/power/:power', successIfExists, (req,res) => {
   res.json(`${power} deleted`)
 })
 
+app.put('/:slug', successIfExists, validateHero, (req,res) => {
+  const { slug } = req.params
+  const index = heroes.findIndex(hero => hero.slug === slug)
+
+  heroes[index] = {
+    // Je récupère mon objet de base (ex: thor) et je mets à jour
+    // toutes ses clés contenues dans req.body
+    ...heroes[index],
+    // chaque modification d'un clé existante remplacera la clé
+    // présente dans mon héro de base
+    ...req.body
+  }
+
+  res.json(heroes[index])
+})
 module.exports = app
   
 

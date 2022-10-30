@@ -7,8 +7,8 @@ const heroesRoutes = require('./routes/heroes')
 
 app.use(morgan('tiny'))
 app.use(express.json())
-app.use('/heroes', heroesRoutes)
 
+app.use('/heroes', heroesRoutes)
 
 app.listen(port, () => {
     console.log(`server running on port ${port}`)
