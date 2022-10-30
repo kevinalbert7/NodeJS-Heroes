@@ -1,21 +1,28 @@
 import { useContext, useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 import { HeroContext } from '../contexts/Hero'
 import Container from '../components/Container'
 import Img from '../components/Img'
 import { Grid, GridItem } from '../components/Grid'
 import Button from '../components/Button'
+import UpdatePowerModal from '../components/Hero/UpdatePowerModal'
 
 const Hero = () => {
     const { slug } = useParams()
+    const navigate = useNavigate()
     const { getHero, deleteHero } = useContext(HeroContext)
     const [hero, setHero] = useState(null)
 
     useEffect(() => {
         getHero(slug)
             .then(response => setHero(response))
-    }, getHero)
+    }, [])
+
+    const handleDeleteClick = () => {
+        deleteHero(slug)
+            .then(() => navigate("/"))
+    }
 
     if (!hero) {
         return <h3>Loading...</h3>
@@ -31,7 +38,7 @@ const Hero = () => {
                 <GridItem>
                     <Button 
                     background="red"
-                    onClick={() => deleteHero(slug)}
+                    onClick={handleDeleteClick}
                     >
                         Delete
                     </Button>
@@ -46,8 +53,10 @@ const Hero = () => {
                 <GridItem>
                     <p>Color: <span style={{ color: hero.color }}>{hero.color}</span></p>
                     <p>Powers: {hero.power.join(", ")}</p>
+                    <Button background="teal">Add power</Button>
                 </GridItem>
             </Grid>
+            <UpdatePowerModal />
         </Container>
     )
 }

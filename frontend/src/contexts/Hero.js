@@ -1,4 +1,5 @@
 import { createContext } from 'react'
+import { Navigate } from 'react-router-dom'
 
 const apiUrl = `http://localhost:5000/heroes`
 
@@ -21,9 +22,19 @@ const HeroContextProvider = ({ children }) => {
     return fetch(`${apiUrl}/${slug}`, {
       method: 'delete'
     })
-      .then(response => console.log(response))
-      // .then(data => data)
+      .then(response => response)
+  }
 
+  // le paramètre body correspond au pouvoir que j'ajoute
+  // => { power: "invisible" }
+  const updatePower = (slug, body) => {
+    fetch(`${apiUrl}/${slug}/powers`, {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
   }
 
   const value = {
