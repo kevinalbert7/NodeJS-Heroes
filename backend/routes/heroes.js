@@ -58,6 +58,7 @@ app.get('/:slug/powers', successIfExists, (req, res) => {
 })
 
 app.post('/', failIfExists, validateHero, (req, res) => {
+  console.log(req.body)
   const hero = { 
     slug: req.body.name.toLowerCase().replace(/[^\w\s]/gi, '-'),
     ...req.body
@@ -104,11 +105,13 @@ app.put('/:slug', successIfExists, validateHero, (req,res) => {
     ...heroes[index],
     // chaque modification d'un clé existante remplacera la clé
     // présente dans mon héro de base
-    ...req.body
+    ...req.body,
+    slug: req.body.name ? req.body.name.toLowerCase().replace(/[^\w]/gi, '-') : heroes[index].slug
   }
 
   res.json(heroes[index])
 })
+
 module.exports = app
   
 
