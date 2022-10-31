@@ -25,8 +25,6 @@ const UpdatePowerForm = ({ setHero, onClose }) => {
         }
     })
 
-    // console.log(formik.values)
-
   return (
     <form onSubmit={formik.handleSubmit}>
         <Input 

@@ -25,7 +25,7 @@ const HeroContextProvider = ({ children }) => {
   }
 
   // le paramètre body correspond au pouvoir que j'ajoute
-  // => { power: "invisible" }
+  // => { ex => power: "invisible" }
   const updatePowers = (slug, body) => {
     return fetch(`${apiUrl}/${slug}/powers`, {
       method: 'put',

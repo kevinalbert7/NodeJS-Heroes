@@ -17,20 +17,14 @@ const customStyles = {
 
 const UpdateHeroModal = ({ isOpen, onClose, hero }) => {
   return (
-    <Modal 
-        isOpen={isOpen}
-        style={customStyles}
-    >
-        <h2>Update Hero</h2>
-        <UpdateHeroForm 
-          hero={hero}
-          onClose={onClose}      
-        />
-        <Flex>
-          <Button background="red" onClick={onClose}>
-            X
-          </Button>
-        </Flex>
+    <Modal isOpen={isOpen} style={customStyles}>
+      <h2>Update Hero</h2>
+      <UpdateHeroForm hero={hero} onClose={onClose} />
+      <Flex>
+        <Button background="red" onClick={onClose}>
+          X
+        </Button>
+      </Flex>
     </Modal>
   )
 }

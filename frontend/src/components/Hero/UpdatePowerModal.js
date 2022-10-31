@@ -18,16 +18,16 @@ const customStyles = {
 const UpdatePowerModal = ({ isOpen, setHero, onClose }) => {
   return (
     <Modal 
-        isOpen={isOpen}
-        style={customStyles}
+      isOpen={isOpen}
+      style={customStyles}
     >
-        <h2>Update powers</h2>
-        <UpdatePowerForm setHero={setHero} onClose={onClose}/>
-        <Flex>
-          <Button background="red" onClick={onClose}>
-            X
-          </Button>
-        </Flex>
+      <h2>Update powers</h2>
+      <UpdatePowerForm setHero={setHero} onClose={onClose}/>
+      <Flex>
+        <Button background="red" onClick={onClose}>
+          X
+        </Button>
+      </Flex>
     </Modal>
   )
 }

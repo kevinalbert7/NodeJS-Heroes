@@ -20,7 +20,7 @@ const CreateHero = () => {
       image: "https://img.le-dictionnaire.com/lion.jpg",
       isAlive: "",
       power: ""
-    },onSubmit: (values, { resetForm }) => {
+    },onSubmit: (values) => {
       values = {
         ...values,
         power: values.power.split(", ")
@@ -33,7 +33,7 @@ const CreateHero = () => {
 
   return (
     <Container>
-      <h1>Create a hero</h1>
+      <h1>Create your hero</h1>
       <form onSubmit={formik.handleSubmit}>
         <Input
           type="text"

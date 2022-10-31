@@ -79,7 +79,7 @@ const Hero = () => {
                             <>
                                 <Power onClick={() => handlePowerClick(power)}>
                                     {power}
-                                    {/* si c'est pas le dernier, on sépare par dess virgules */}
+                                    {/* si ce n'est pas le dernier, on sépare par des virgules */}
                                 </Power>
                                 {index !== hero.power.length -1 && ", "}
                             </>
@@ -88,8 +88,8 @@ const Hero = () => {
                         onClick={() => setUpdatePowerModalVisible(true)}    
                         background="teal"
                     >
-                            Add power
-                        </Button>
+                        Add power
+                    </Button>
                 </GridItem>
             </Grid>
             <UpdatePowerModal 
