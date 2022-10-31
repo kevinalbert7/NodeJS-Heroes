@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 
 import { HeroContext } from '../contexts/Hero'
 import Container from '../components/Container'
@@ -7,21 +7,36 @@ import Img from '../components/Img'
 import { Grid, GridItem } from '../components/Grid'
 import Button from '../components/Button'
 import UpdatePowerModal from '../components/Hero/UpdatePowerModal'
+import UpdateHeroModal from '../components/Hero/UpdateHeroModal'
+import Power from '../components/Hero/Power'
 
 const Hero = () => {
     const { slug } = useParams()
     const navigate = useNavigate()
-    const { getHero, deleteHero } = useContext(HeroContext)
+    const location = useLocation()
+    const { getHero, deleteHero, deletePower } = useContext(HeroContext)
     const [hero, setHero] = useState(null)
+    const [updatePowerModalVisible, setUpdatePowerModalVisible] = useState(false)
+    const [updateHeroModalVisible, setUpdateHeroModalVisible] = useState(false)
 
     useEffect(() => {
         getHero(slug)
             .then(response => setHero(response))
-    }, [])
+    }, [getHero, slug, location.pathname])
 
     const handleDeleteClick = () => {
         deleteHero(slug)
             .then(() => navigate("/"))
+    }
+
+    const handlePowerClick = power => {
+        deletePower(slug, power)
+            .then(() => {
+                // quand mon API me répond que le pouvoir est supprimé,
+                // je vais le re get pour l'avoir à jour sur ma page
+                getHero(slug)
+                    .then(response => setHero(response))
+            })
     }
 
     if (!hero) {
@@ -37,8 +52,14 @@ const Hero = () => {
                 </GridItem>
                 <GridItem>
                     <Button 
-                    background="red"
-                    onClick={handleDeleteClick}
+                        background="orange"
+                        onClick={() => setUpdateHeroModalVisible(true)}
+                    >
+                        Update
+                    </Button>
+                    <Button 
+                        background="red"
+                        onClick={(handleDeleteClick)}
                     >
                         Delete
                     </Button>
@@ -52,11 +73,35 @@ const Hero = () => {
                 </GridItem>
                 <GridItem>
                     <p>Color: <span style={{ color: hero.color }}>{hero.color}</span></p>
-                    <p>Powers: {hero.power.join(", ")}</p>
-                    <Button background="teal">Add power</Button>
+                    <p>
+                        Powers: 
+                        {hero.power.map((power, index) => (
+                            <>
+                                <Power onClick={() => handlePowerClick(power)}>
+                                    {power}
+                                    {/* si c'est pas le dernier, on sépare par dess virgules */}
+                                </Power>
+                                {index !== hero.power.length -1 && ", "}
+                            </>
+                    ))}</p>
+                    <Button 
+                        onClick={() => setUpdatePowerModalVisible(true)}    
+                        background="teal"
+                    >
+                            Add power
+                        </Button>
                 </GridItem>
             </Grid>
-            <UpdatePowerModal />
+            <UpdatePowerModal 
+                isOpen={updatePowerModalVisible}
+                onClose={() => setUpdatePowerModalVisible(false)}
+                setHero={setHero}
+            />
+            <UpdateHeroModal 
+                isOpen={updateHeroModalVisible}
+                hero={hero}
+                onClose={() => setUpdateHeroModalVisible(false)}
+            />
         </Container>
     )
 }

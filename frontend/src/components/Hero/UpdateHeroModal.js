@@ -1,6 +1,6 @@
 import Modal from 'react-modal'
 
-import UpdatePowerForm from './UpdatePowerForm'
+import UpdateHeroForm from './UpdateHeroForm'
 import Button from '../Button'
 import Flex from '../Flex'
 
@@ -15,14 +15,17 @@ const customStyles = {
   },
 }
 
-const UpdatePowerModal = ({ isOpen, setHero, onClose }) => {
+const UpdateHeroModal = ({ isOpen, onClose, hero }) => {
   return (
     <Modal 
         isOpen={isOpen}
         style={customStyles}
     >
-        <h2>Update powers</h2>
-        <UpdatePowerForm setHero={setHero} onClose={onClose}/>
+        <h2>Update Hero</h2>
+        <UpdateHeroForm 
+          hero={hero}
+          onClose={onClose}      
+        />
         <Flex>
           <Button background="red" onClick={onClose}>
             X
@@ -32,4 +35,4 @@ const UpdatePowerModal = ({ isOpen, setHero, onClose }) => {
   )
 }
 
-export default UpdatePowerModal
+export default UpdateHeroModal

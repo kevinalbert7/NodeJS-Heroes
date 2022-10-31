@@ -1,19 +1,31 @@
+import { useContext } from 'react'
 import { useFormik } from 'formik'
+import { useParams } from 'react-router-dom'
 
+import { HeroContext } from '../../contexts/Hero'
 import Button from '../Button'
 import Input from '../Input'
+import Flex from '../Flex'
 
-const UpdatePowerForm = () => {
+const UpdatePowerForm = ({ setHero, onClose }) => {
+    const { slug } = useParams()
+    const { updatePowers } = useContext(HeroContext)
+
     const formik = useFormik({
         initialValues: {
             power: ""
         },
-        onSubmit: values => {
-            console.log(values)
+        onSubmit: (values, { resetForm }) => {
+            updatePowers(slug, values)
+                .then(response => {
+                    setHero(response)
+                    resetForm()
+                    onClose()
+                })
         }
     })
 
-    console.log(formik.values)
+    // console.log(formik.values)
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -23,12 +35,15 @@ const UpdatePowerForm = () => {
             name="power"
             onChange={formik.handleChange}
         />
-        <Button 
-            type="submit"
-            background="teal"
-        >
-            Validate
-        </Button>
+        <Flex>
+            <Button 
+                type="submit"
+                background="teal"
+                disabled={formik.values.power.length === 0}
+            >
+                Validate
+            </Button>
+        </Flex>
     </form>
   )
 }

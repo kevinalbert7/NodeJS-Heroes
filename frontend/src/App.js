@@ -1,6 +1,5 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { ChakraProvider, Box } from '@chakra-ui/react'
 
 import { HeroContextProvider } from './contexts/Hero'
 import Home from './pages/Home'

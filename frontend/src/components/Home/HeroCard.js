@@ -5,9 +5,11 @@ import Img from "../Img"
 const Container = styled.div`
     border: 1px solid #333;
     border-radius: 5px;
+    margin-right: 20px;
 `
 
 const Info = styled.div`
+    height: 80px;
     text-align: center;
     padding: 10px 0px;
 `

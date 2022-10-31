@@ -13,7 +13,7 @@ const Home = () => {
     useEffect(() => {
         getHeroes()
             .then(response => setHeroes(response))
-    }, [])
+    }, [getHeroes])
 
     return (
         <Container>

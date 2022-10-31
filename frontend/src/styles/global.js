@@ -5,6 +5,11 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Oswald', sans-serif;
         font-weight: 800;
     }
+
+    a {
+        text-decoration: none;
+        color: #333;
+    }
 `
 
 export default GlobalStyle
