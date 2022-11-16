@@ -1,10 +1,10 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 const Img = styled.div`
-    height: ${props => props.height};
-    background-image: url('${props => props.backgroundImage}');
-    background-position: center;
-    background-size: cover;
-`
+  height: ${(props) => props.height};
+  background-image: url("${(props) => props.backgroundImage}");
+  background-position: center;
+  background-size: cover;
+`;
 
-export default Img
+export default Img;

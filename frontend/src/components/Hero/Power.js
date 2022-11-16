@@ -1,11 +1,11 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 const Power = styled.span`
-    cursor: pointer;
+  cursor: pointer;
 
-    &:hover {
-        background: rgba(255, 0, 0, 0.4);
-    }
-`
+  &:hover {
+    background: rgba(255, 0, 0, 0.4);
+  }
+`;
 
-export default Power
+export default Power;

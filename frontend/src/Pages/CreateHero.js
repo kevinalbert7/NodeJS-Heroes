@@ -1,16 +1,16 @@
-import { useContext } from "react"
-import { useFormik } from "formik"
-import { useNavigate } from "react-router-dom"
+import { useContext } from "react";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 
-import { HeroContext } from "../contexts/Hero"
-import Container from "../components/Container"
-import Input from "../components/Input"
-import Button from "../components/Button"
-import Flex from "../components/Flex"
+import { HeroContext } from "../contexts/Hero";
+import Container from "../components/Container";
+import Input from "../components/Input";
+import Button from "../components/Button";
+import Flex from "../components/Flex";
 
 const CreateHero = () => {
-  const navigate = useNavigate()
-  const { createHero } = useContext(HeroContext)
+  const navigate = useNavigate();
+  const { createHero } = useContext(HeroContext);
 
   const formik = useFormik({
     initialValues: {
@@ -19,17 +19,17 @@ const CreateHero = () => {
       color: "",
       image: "https://img.le-dictionnaire.com/lion.jpg",
       isAlive: "",
-      power: ""
-    },onSubmit: (values) => {
+      power: "",
+    },
+    onSubmit: (values) => {
       values = {
         ...values,
-        power: values.power.split(", ")
-      }
+        power: values.power.split(", "),
+      };
 
-      createHero(values)
-        .then(() => navigate("/"))
-    }
-  })
+      createHero(values).then(() => navigate("/"));
+    },
+  });
 
   return (
     <Container>
@@ -42,14 +42,14 @@ const CreateHero = () => {
           onChange={formik.handleChange}
           placeholder="name"
         />
-        <Input 
+        <Input
           type="number"
           name="age"
           value={formik.values.age}
           onChange={formik.handleChange}
           placeholder="age"
         />
-        <Input 
+        <Input
           type="text"
           name="color"
           value={formik.values.color}
@@ -57,13 +57,13 @@ const CreateHero = () => {
           placeholder="color"
         />
         <label>isAlive</label>
-        <Input 
+        <Input
           type="checkbox"
           name="isAlive"
           checked={formik.values.isAlive}
           onChange={formik.handleChange}
         />
-        <Input 
+        <Input
           type="text"
           name="image"
           value={formik.values.image}
@@ -71,7 +71,7 @@ const CreateHero = () => {
           placeholder="image"
         />
         <label>Separate your powers with a comma</label>
-        <Input 
+        <Input
           type="text"
           name="power"
           value={formik.values.power}
@@ -79,16 +79,13 @@ const CreateHero = () => {
           placeholder="powers"
         />
         <Flex>
-          <Button 
-            type="submit"
-            background="teal"
-          >
+          <Button type="submit" background="teal">
             Validate
           </Button>
         </Flex>
       </form>
     </Container>
-  )
-}
+  );
+};
 
-export default CreateHero
+export default CreateHero;

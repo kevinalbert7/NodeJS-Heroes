@@ -1,19 +1,19 @@
-import Modal from 'react-modal'
+import Modal from "react-modal";
 
-import UpdateHeroForm from './UpdateHeroForm'
-import Button from '../Button'
-import Flex from '../Flex'
+import UpdateHeroForm from "./UpdateHeroForm";
+import Button from "../Button";
+import Flex from "../Flex";
 
 const customStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
   },
-}
+};
 
 const UpdateHeroModal = ({ isOpen, onClose, hero }) => {
   return (
@@ -26,7 +26,7 @@ const UpdateHeroModal = ({ isOpen, onClose, hero }) => {
         </Button>
       </Flex>
     </Modal>
-  )
-}
+  );
+};
 
-export default UpdateHeroModal
+export default UpdateHeroModal;

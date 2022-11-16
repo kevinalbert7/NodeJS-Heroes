@@ -1,73 +1,71 @@
-import { createContext } from 'react'
+import { createContext } from "react";
 
-const apiUrl = `http://localhost:5000/heroes`
+const apiUrl = `http://localhost:5000/heroes`;
 
-const HeroContext = createContext({})
+const HeroContext = createContext({});
 
 const HeroContextProvider = ({ children }) => {
   const getHeroes = () => {
     return fetch(`${apiUrl}`)
-      .then(response => response.json())
-      .then(data => data)
-  }
+      .then((response) => response.json())
+      .then((data) => data);
+  };
 
-  const getHero = slug => {
+  const getHero = (slug) => {
     return fetch(`${apiUrl}/${slug}`)
-      .then(response => response.json())
-      .then(data => data)
-  }
+      .then((response) => response.json())
+      .then((data) => data);
+  };
 
-  const deleteHero = slug => {
+  const deleteHero = (slug) => {
     return fetch(`${apiUrl}/${slug}`, {
-      method: 'delete'
-    })
-      .then(response => response)
-  }
+      method: "delete",
+    }).then((response) => response);
+  };
 
   // le paramètre body correspond au pouvoir que j'ajoute
   // => { ex => power: "invisible" }
   const updatePowers = (slug, body) => {
     return fetch(`${apiUrl}/${slug}/powers`, {
-      method: 'put',
+      method: "put",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     })
-      .then(response => response.json())
-      .then(data => data)
-  }
+      .then((response) => response.json())
+      .then((data) => data);
+  };
 
   const deletePower = (slug, power) => {
     return fetch(`${apiUrl}/${slug}/power/${power}`, {
-      method: 'delete'
-    })
-      .then(response => response)
-  }
+      method: "delete",
+    }).then((response) => response);
+  };
 
   const updateHero = (slug, body) => {
     return fetch(`${apiUrl}/${slug}`, {
-      method: 'put',
+      method: "put",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     })
-      .then(response => response.json())
-      .then(data => data)
-  }
+      .then((response) => response.json())
+      .then((data) => data);
+  };
 
-  const createHero = body => {
+  const createHero = (body) => {
     return fetch(`${apiUrl}`, {
-      method: 'post',
+      method: "post",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     })
-      .then(response => response.json())
-      .then(data => data)
-  }
+      .then((response) => response.json())
+      .then((data) => data);
+  };
 
   const value = {
     getHeroes,
@@ -76,17 +74,10 @@ const HeroContextProvider = ({ children }) => {
     updatePowers,
     deletePower,
     updateHero,
-    createHero
-  }
+    createHero,
+  };
 
-  return (
-    <HeroContext.Provider value={value}>
-        {children}
-    </HeroContext.Provider>
-  )
-}
+  return <HeroContext.Provider value={value}>{children}</HeroContext.Provider>;
+};
 
-export {
-    HeroContext,
-    HeroContextProvider
-}
+export { HeroContext, HeroContextProvider };
